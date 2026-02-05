@@ -188,11 +188,11 @@
                             class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-slate-100 transition-colors">
                             <div
                                 class="flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-slate-200 shadow-sm">
-                                <i class="fas fa-certificate text-slate-900 text-sm"></i>
+                                <i class="fas fa-user-md text-slate-900 text-sm"></i>
                             </div>
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Nomor SIP</p>
-                                <p class="text-sm font-bold text-slate-800">[Nomor SIP Anda]</p>
+                                <p class="text-sm font-bold text-slate-800">00000000000000</p>
                             </div>
                         </div>
 
@@ -208,7 +208,7 @@
 
                             <div
                                 class="p-5 rounded-2xl border border-slate-200 hover:border-slate-400 transition-all duration-300">
-                                <i class="fas fa-fingerprint text-slate-900 mb-3 block"></i>
+                                <i class="fas fa-stethoscope text-slate-900 mb-3 block"></i>
                                 <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">Keahlian</h4>
                                 <p class="text-xs text-slate-500 leading-relaxed font-medium">Kandungan, Kesehatan
                                     Reproduksi Holistik, Fertilitas, Preventive Medicine</p>
@@ -239,27 +239,59 @@
             <div class="grid lg:grid-cols-2 gap-8">
                 <div class="bg-white p-10 rounded-[32px] shadow-sm flex flex-col md:flex-row gap-10">
                     <div class="flex-1">
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <h4 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-2">Alamat Klinik
                             </h4>
                             <p class="text-sm text-slate-600 leading-relaxed">Jl. Dahlia No. 9, Telawang, Banjarmasin
                                 Barat, Kalimantan Selatan 70112</p>
                         </div>
-                        <div>
+                        <div class="mb-6">
                             <h4 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-2">Jam Operasional
                             </h4>
                             <p class="text-sm text-slate-600">Senin - Sabtu: 15.00 - Selesai</p>
                         </div>
+                        <div>
+                            <h4 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-2">Apoteker</h4>
+                            <p class="text-sm font-bold text-slate-800">Irma Roselina</p>
+                            <p class="text-xs text-slate-500 mt-1">SIPA: [Masukkan Nomor SIPA Di Sini]</p>
+                        </div>
                     </div>
                     <div class="flex-1 space-y-4">
-                        <input type="text" placeholder="Nama Lengkap"
+                        <input type="text" id="wa_nama" placeholder="Nama Lengkap"
                             class="w-full p-3 bg-slate-50 rounded-xl text-sm border border-transparent focus:border-slate-200 focus:outline-none">
-                        <input type="email" placeholder="Email/WhatsApp"
+
+
+                        <input type="date" id="wa_tanggal" placeholder="Tanggal"
+                            class="w-full p-3 bg-slate-50 rounded-xl text-sm border border-transparent focus:border-slate-200 focus:outline-none text-slate-500">
+
+                        <input type="text" id="wa_jam" placeholder="Jam (Contoh: 16.00)"
                             class="w-full p-3 bg-slate-50 rounded-xl text-sm border border-transparent focus:border-slate-200 focus:outline-none">
-                        <button
-                            class="w-full bg-slate-800 text-white p-3 rounded-xl text-sm font-bold shadow-lg shadow-slate-200">Kirim
-                            Pesan</button>
+
+                        <button onclick="kirimWA()"
+                            class="w-full bg-slate-800 text-white p-3 rounded-xl text-sm font-bold shadow-lg shadow-slate-200">
+                            Kirim Pesan
+                        </button>
                     </div>
+
+                    <script>
+                        function kirimWA() {
+                            const nama = document.getElementById('wa_nama').value;
+                            const tanggal = document.getElementById('wa_tanggal').value;
+                            const jam = document.getElementById('wa_jam').value;
+                            const nomorWA = "6285390171919";
+
+                            // Template Pesan Otomatis
+                            const pesan = "Halo Klinik Apotek Sulthan, saya ingin mendaftar untuk kunjungan:" + "%0A%0A" +
+                                "*Nama:* " + (nama || "-") + "%0A" +
+                                "*Tanggal:* " + (tanggal || "-") + "%0A" +
+                                "*Jam Kedatangan:* " + (jam || "-") + "%0A%0A" +
+                                "Mohon konfirmasi ketersediaan jadwalnya. Terima kasih.";
+
+                            const linkWA = "https://wa.me/" + nomorWA + "?text=" + pesan;
+
+                            window.open(linkWA, '_blank');
+                        }
+                    </script>
                 </div>
 
                 <div class="rounded-[32px] overflow-hidden shadow-sm h-full min-h-[300px]">
